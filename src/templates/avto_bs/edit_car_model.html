@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}Update Car Model{% endblock %}
+
+{% block content %}
+  <h2>Update Car Model</h2>
+  <form method="post">
+    {% csrf_token %}
+    <div class="mb-3">
+      <label for="model_name" class="form-label">Model Name:</label>
+      <input type="text" class="form-control" id="model_name" name="model_name" value="{{ instance.Name }}" required>
+    </div>
+    <div class="mb-3">
+      <label for="brand_id" class="form-label">Brand:</label>
+      <select class="form-select" id="brand_id" name="BrandID" required>
+        {% for brand in brands %}
+          <option value="{{ brand.pk }}" {% if brand.pk == instance.BrandID.pk %}selected{% endif %}>{{ brand.Name }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Update Model</button>
+  </form>
+{% endblock %}
